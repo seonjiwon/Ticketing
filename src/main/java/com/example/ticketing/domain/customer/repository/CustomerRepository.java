@@ -1,7 +1,7 @@
-package com.example.ticketing.domain.user.repository;
+package com.example.ticketing.domain.customer.repository;
 
 
-import com.example.ticketing.domain.user.entity.Customer;
+import com.example.ticketing.domain.customer.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

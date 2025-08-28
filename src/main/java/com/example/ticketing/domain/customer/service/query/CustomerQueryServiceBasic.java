@@ -1,9 +1,9 @@
-package com.example.ticketing.domain.user.service.query;
+package com.example.ticketing.domain.customer.service.query;
 
 import com.example.ticketing.common.exception.CustomException;
-import com.example.ticketing.domain.user.code.CustomerErrorCode;
-import com.example.ticketing.domain.user.entity.Customer;
-import com.example.ticketing.domain.user.repository.CustomerRepository;
+import com.example.ticketing.domain.customer.code.CustomerErrorCode;
+import com.example.ticketing.domain.customer.entity.Customer;
+import com.example.ticketing.domain.customer.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

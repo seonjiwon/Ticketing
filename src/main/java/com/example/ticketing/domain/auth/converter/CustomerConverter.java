@@ -2,7 +2,7 @@ package com.example.ticketing.domain.auth.converter;
 
 import com.example.ticketing.domain.auth.dto.SignUpResponse;
 import com.example.ticketing.domain.auth.dto.CustomerDto;
-import com.example.ticketing.domain.user.entity.Customer;
+import com.example.ticketing.domain.customer.entity.Customer;
 
 public class CustomerConverter {
     public static SignUpResponse toSignUpResponse(Customer customer) {

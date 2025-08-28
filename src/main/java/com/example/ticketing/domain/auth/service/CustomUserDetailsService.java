@@ -3,7 +3,7 @@ package com.example.ticketing.domain.auth.service;
 import com.example.ticketing.domain.auth.converter.CustomerConverter;
 import com.example.ticketing.domain.auth.dto.CustomUserDetails;
 import com.example.ticketing.domain.auth.dto.CustomerDto;
-import com.example.ticketing.domain.user.repository.CustomerRepository;
+import com.example.ticketing.domain.customer.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
