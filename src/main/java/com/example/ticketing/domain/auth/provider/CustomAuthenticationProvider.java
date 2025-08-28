@@ -3,7 +3,7 @@ package com.example.ticketing.domain.auth.provider;
 import com.example.ticketing.common.exception.CustomException;
 import com.example.ticketing.domain.auth.dto.CustomUserDetails;
 import com.example.ticketing.domain.auth.service.CustomUserDetailsService;
-import com.example.ticketing.domain.user.code.CustomerErrorCode;
+import com.example.ticketing.domain.customer.code.CustomerErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

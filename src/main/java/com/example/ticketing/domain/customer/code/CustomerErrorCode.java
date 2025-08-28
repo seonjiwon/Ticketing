@@ -1,4 +1,4 @@
-package com.example.ticketing.domain.user.code;
+package com.example.ticketing.domain.customer.code;
 
 import com.example.ticketing.common.code.error.BaseErrorCode;
 import lombok.AllArgsConstructor;

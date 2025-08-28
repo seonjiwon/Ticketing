@@ -1,4 +1,4 @@
-package com.example.ticketing.domain.user.entity;
+package com.example.ticketing.domain.customer.entity;
 
 import com.example.ticketing.common.entity.BaseEntity;
 import jakarta.persistence.*;
