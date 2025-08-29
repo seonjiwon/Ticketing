@@ -28,8 +28,6 @@ public class PerformanceItem extends BaseEntity {
     @JoinColumn(name = "performance_hall_id")
     private PerformanceHall performanceHall;
 
-    private String title; // Performance 제목
-
     private LocalDate startDate; // 공연 시작일
 
     private LocalDate endDate; // 공연 종료일

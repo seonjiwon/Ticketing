@@ -23,7 +23,7 @@ public class Seat {
     @Enumerated(EnumType.STRING)
     private Section section; // VIP, R, S
 
-    private int row; // 행
+    private int rowNo; // 행
 
-    private int column; // 열
+    private int colNo; // 열
 }

@@ -27,7 +27,7 @@ public class ReservationSeat {
     @JoinColumn(name = "seat_id")
     private Seat seat;
 
-    private LocalDate reservationDate; // 예약일
+    private LocalDate performanceDate; // 공연일
 
     private ReservationStatus status;
 }

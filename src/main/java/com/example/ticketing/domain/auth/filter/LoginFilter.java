@@ -3,6 +3,7 @@ package com.example.ticketing.domain.auth.filter;
 import com.example.ticketing.common.CustomResponse;
 import com.example.ticketing.domain.auth.dto.LoginRequest;
 import com.example.ticketing.domain.auth.jwt.JwtUtil;
+import com.example.ticketing.domain.customer.code.CustomerErrorCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -75,7 +76,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         response.setCharacterEncoding("UTF-8");
 
         CustomResponse<?> body = CustomResponse.onFailure(
-                HttpStatus.UNAUTHORIZED, "INVALID_CREDENTIALS", "이메일 또는 비밀번호가 일치하지 않습니다", false, null);
+                HttpStatus.UNAUTHORIZED, CustomerErrorCode.UNAUTHORIZED.getCode(), "이메일 또는 비밀번호가 일치하지 않습니다", false, null);
 
         ObjectMapper objectMapper = new ObjectMapper();
         response.getWriter().write(objectMapper.writeValueAsString(body));
