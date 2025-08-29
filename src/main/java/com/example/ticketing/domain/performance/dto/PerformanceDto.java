@@ -36,7 +36,6 @@ public class PerformanceDto {
     }
 
     public record PerformanceItemDto(
-            @NotNull String title,
             @NotNull Long performanceHallId,
             @NotNull LocalDate startDate,
             @NotNull LocalDate endDate,

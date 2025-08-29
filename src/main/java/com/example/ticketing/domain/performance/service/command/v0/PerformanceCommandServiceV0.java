@@ -23,9 +23,10 @@ import java.util.List;
 @Transactional
 public class PerformanceCommandServiceV0 implements PerformanceCommandService {
 
-    private final PerformanceRepository performanceRepository;
     private final PerformanceItemCommandService performanceItemCommandService;
     private final PriceCommandService priceCommandService;
+
+    private final PerformanceRepository performanceRepository;
 
     @Override
     public PerformanceDto.CreateResponse createPerformance(PerformanceDto.CreateRequest request) {
