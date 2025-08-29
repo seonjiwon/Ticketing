@@ -1,7 +1,7 @@
 ---
 name: "TEST"
 about: 테스트 템플릿입니다.
-title: "test: "
+title: "Test: "
 labels: test
 assignees: ''
 ---
