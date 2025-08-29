@@ -32,15 +32,15 @@ public class PerformanceCommandServiceV0 implements PerformanceCommandService {
     public PerformanceDto.CreateResponse createPerformance(PerformanceDto.CreateRequest request) {
         // 1. Performance 생성
         Performance performance = PerformanceConverter.of(request.category(), request.name());
-        performanceRepository.save(performance);
+        Performance savedPerformance = performanceRepository.save(performance);
 
         // 2. PerformanceItem 생성
-        PerformanceItem performanceItem = performanceItemCommandService.createPerformanceItem(performance, request.performanceItem());
+        PerformanceItem savedPerformanceItem = performanceItemCommandService.createPerformanceItem(performance, request.performanceItem());
 
         // 3. Price 할당
-        priceCommandService.allocate(performanceItem, request.sectionConfigs());
+        priceCommandService.allocate(savedPerformanceItem, request.sectionConfigs());
 
-        return PerformanceConverter.toCreateResponse(performance, performanceItem);
+        return PerformanceConverter.toCreateResponse(savedPerformance, savedPerformanceItem);
     }
 
     @Override

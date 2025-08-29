@@ -12,6 +12,7 @@ import java.util.List;
 
 public class PerformanceDto {
 
+    @Builder
     public record CreateRequest(
             @NotNull Category category,
             @NotNull String name,
@@ -35,6 +36,7 @@ public class PerformanceDto {
     ) {
     }
 
+    @Builder
     public record PerformanceItemDto(
             @NotNull Long performanceHallId,
             @NotNull LocalDate startDate,
@@ -43,6 +45,7 @@ public class PerformanceDto {
     ) {
     }
 
+    @Builder
     public record SectionConfigs(
             @NotNull Section section,
             @NotNull int price
