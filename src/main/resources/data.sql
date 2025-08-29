@@ -1,129 +1,101 @@
--- PerformanceHall 테이블 데이터
-INSERT INTO performance_hall (venue) VALUES
-                                         ('소극장 A'),           -- ID: 1 (1석)
-                                         ('중형홀 B'),           -- ID: 2 (500석)
-                                         ('대형홀 C'),           -- ID: 3 (1,500석)
-                                         ('메가홀 D');           -- ID: 4 (3,000석)
+-- =================================================================
+-- 공연장(PerformanceHall) 테이블 데이터 삽입
+-- =================================================================
+INSERT INTO performance_hall (venue)
+VALUES ('소극장 A'), -- ID: 1
+       ('중형홀 B'), -- ID: 2
+       ('대형홀 C');
+-- ID: 3
 
--- Seat 테이블 데이터
+-- =================================================================
+-- 좌석(Seat) 테이블 데이터 삽입
+-- =================================================================
 
--- 1. 소극장 A (1석) - VIP 1석
-INSERT INTO seat (performance_hall_id, section, row_no, col_no) VALUES
-    (1, 'VIP', 1, 1);
-
--- 2. 중형홀 B (500석) - VIP 50석, R 200석, S 250석
--- VIP 섹션 (50석) - 5행 10열
+-- 1. 소극장 A (ID: 1) 좌석 데이터 - 총 1석
+-- -----------------------------------------------------------------
 INSERT INTO seat (performance_hall_id, section, row_no, col_no)
-SELECT 2, 'VIP',
-       FLOOR((seq - 1) / 10) + 1 as row_num,
-       ((seq - 1) % 10) + 1 as col_num
-FROM (
-    SELECT ROW_NUMBER() OVER () as seq
-    FROM information_schema.columns
-    LIMIT 50
-    ) t;
+VALUES (1, 'VIP', 1, 1);
 
--- R 섹션 (200석) - 10행 20열
-INSERT INTO seat (performance_hall_id, section, row_no, col_no)
-SELECT 2, 'R',
-       FLOOR((seq - 1) / 20) + 6 as row_num,  -- 6행부터 시작
-       ((seq - 1) % 20) + 1 as col_num
-FROM (
-    SELECT ROW_NUMBER() OVER () as seq
-    FROM information_schema.columns a
-    CROSS JOIN information_schema.columns b
-    LIMIT 200
-    ) t;
 
--- S 섹션 (250석) - 10행 25열
+-- 2. 중형홀 B (ID: 2) 좌석 데이터 - 총 500석
+-- -----------------------------------------------------------------
+-- VIP 섹션 (50석) : 5행 10열
 INSERT INTO seat (performance_hall_id, section, row_no, col_no)
-SELECT 2, 'S',
-       FLOOR((seq - 1) / 25) + 16 as row_num,  -- 16행부터 시작
-       ((seq - 1) % 25) + 1 as col_num
-FROM (
-    SELECT ROW_NUMBER() OVER () as seq
-    FROM information_schema.columns a
-    CROSS JOIN information_schema.columns b
-    LIMIT 250
-    ) t;
+WITH RECURSIVE NumberSequence (seq) AS (SELECT 1
+                                        UNION ALL
+                                        SELECT seq + 1
+                                        FROM NumberSequence
+                                        WHERE seq < 50)
+SELECT 2,
+       'VIP',
+       FLOOR((seq - 1) / 10) + 1 AS row_no,
+       ((seq - 1) % 10) + 1 AS col_no
+FROM NumberSequence;
 
--- 3. 대형홀 C (1,500석) - VIP 150석, R 600석, S 750석
--- VIP 섹션 (150석) - 10행 15열
+-- R 섹션 (200석) : 10행 20열 (6행부터 시작)
 INSERT INTO seat (performance_hall_id, section, row_no, col_no)
-SELECT 3, 'VIP',
-       FLOOR((seq - 1) / 15) + 1 as row_num,
-       ((seq - 1) % 15) + 1 as col_num
-FROM (
-    SELECT ROW_NUMBER() OVER () as seq
-    FROM information_schema.columns a
-    CROSS JOIN information_schema.columns b
-    LIMIT 150
-    ) t;
+WITH RECURSIVE NumberSequence (seq) AS (SELECT 1
+                                        UNION ALL
+                                        SELECT seq + 1
+                                        FROM NumberSequence
+                                        WHERE seq < 200)
+SELECT 2,
+       'R',
+       FLOOR((seq - 1) / 20) + 6 AS row_no,
+       ((seq - 1) % 20) + 1 AS col_no
+FROM NumberSequence;
 
--- R 섹션 (600석) - 20행 30열
+-- S 섹션 (250석) : 10행 25열 (16행부터 시작)
 INSERT INTO seat (performance_hall_id, section, row_no, col_no)
-SELECT 3, 'R',
-       FLOOR((seq - 1) / 30) + 11 as row_num,  -- 11행부터 시작
-       ((seq - 1) % 30) + 1 as col_num
-FROM (
-    SELECT ROW_NUMBER() OVER () as seq
-    FROM information_schema.columns a
-    CROSS JOIN information_schema.columns b
-    CROSS JOIN information_schema.columns c
-    LIMIT 600
-    ) t;
+WITH RECURSIVE NumberSequence (seq) AS (SELECT 1
+                                        UNION ALL
+                                        SELECT seq + 1
+                                        FROM NumberSequence
+                                        WHERE seq < 250)
+SELECT 2,
+       'S',
+       FLOOR((seq - 1) / 25) + 16 AS row_no,
+       ((seq - 1) % 25) + 1 AS col_no
+FROM NumberSequence;
 
--- S 섹션 (750석) - 25행 30열
-INSERT INTO seat (performance_hall_id, section, row_no, col_no)
-SELECT 3, 'S',
-       FLOOR((seq - 1) / 30) + 31 as row_num,  -- 31행부터 시작
-       ((seq - 1) % 30) + 1 as col_num
-FROM (
-    SELECT ROW_NUMBER() OVER () as seq
-    FROM information_schema.columns a
-    CROSS JOIN information_schema.columns b
-    CROSS JOIN information_schema.columns c
-    LIMIT 750
-    ) t;
 
--- 4. 메가홀 D (3,000석) - VIP 300석, R 1200석, S 1500석
--- VIP 섹션 (300석) - 15행 20열
+-- 3. 대형홀 C (ID: 3) 좌석 데이터 - 총 1,000석
+-- -----------------------------------------------------------------
+-- VIP 섹션 (100석) : 10행 10열
 INSERT INTO seat (performance_hall_id, section, row_no, col_no)
-SELECT 4, 'VIP',
-       FLOOR((seq - 1) / 20) + 1 as row_num,
-       ((seq - 1) % 20) + 1 as col_num
-FROM (
-    SELECT ROW_NUMBER() OVER () as seq
-    FROM information_schema.columns a
-    CROSS JOIN information_schema.columns b
-    CROSS JOIN information_schema.columns c
-    LIMIT 300
-    ) t;
+WITH RECURSIVE NumberSequence (seq) AS (SELECT 1
+                                        UNION ALL
+                                        SELECT seq + 1
+                                        FROM NumberSequence
+                                        WHERE seq < 100)
+SELECT 3,
+       'VIP',
+       FLOOR((seq - 1) / 10) + 1 AS row_no,
+       ((seq - 1) % 10) + 1 AS col_no
+FROM NumberSequence;
 
--- R 섹션 (1,200석) - 30행 40열
+-- R 섹션 (400석) : 20행 20열 (11행부터 시작)
 INSERT INTO seat (performance_hall_id, section, row_no, col_no)
-SELECT 4, 'R',
-       FLOOR((seq - 1) / 40) + 16 as row_num,  -- 16행부터 시작
-       ((seq - 1) % 40) + 1 as col_num
-FROM (
-    SELECT ROW_NUMBER() OVER () as seq
-    FROM information_schema.columns a
-    CROSS JOIN information_schema.columns b
-    CROSS JOIN information_schema.columns c
-    CROSS JOIN information_schema.columns d
-    LIMIT 1200
-    ) t;
+WITH RECURSIVE NumberSequence (seq) AS (SELECT 1
+                                        UNION ALL
+                                        SELECT seq + 1
+                                        FROM NumberSequence
+                                        WHERE seq < 400)
+SELECT 3,
+       'R',
+       FLOOR((seq - 1) / 20) + 11 AS row_no,
+       ((seq - 1) % 20) + 1 AS col_no
+FROM NumberSequence;
 
--- S 섹션 (1,500석) - 30행 50열
+-- S 섹션 (500석) : 25행 20열 (31행부터 시작)
 INSERT INTO seat (performance_hall_id, section, row_no, col_no)
-SELECT 4, 'S',
-       FLOOR((seq - 1) / 50) + 46 as row_num,  -- 46행부터 시작
-       ((seq - 1) % 50) + 1 as col_num
-FROM (
-    SELECT ROW_NUMBER() OVER () as seq
-    FROM information_schema.columns a
-    CROSS JOIN information_schema.columns b
-    CROSS JOIN information_schema.columns c
-    CROSS JOIN information_schema.columns d
-    LIMIT 1500
-    ) t;
+WITH RECURSIVE NumberSequence (seq) AS (SELECT 1
+                                        UNION ALL
+                                        SELECT seq + 1
+                                        FROM NumberSequence
+                                        WHERE seq < 500)
+SELECT 3,
+       'S',
+       FLOOR((seq - 1) / 20) + 31 AS row_no,
+       ((seq - 1) % 20) + 1 AS col_no
+FROM NumberSequence;
